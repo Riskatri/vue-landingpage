@@ -5,30 +5,40 @@
       <v-toolbar-title class="mx-0" v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-dialog>
-            <v-btn text class="pink lighten-3" @click="dialog = true">Sign In</v-btn>
-        </v-dialog>
+        <v-btn text class="pink lighten-3" @click="signIn" v-if="!isLoggedIn">Sign In</v-btn>
+        <v-btn text class="pink lighten-3" @click="logoutUser" v-else>Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-section v-if="notLoggedIn">
+    <section>
         <LandingPage/>
-    </v-section>
+    </section>
 </div>
 </template>
 
 <script>
-
+import { mapGetters, mapActions } from 'vuex'
 import LandingPage from './LandingPage.vue'
 export default {
     components: {
-        LandingPage
+        LandingPage,
+    },
+    computed: {
+    ...mapGetters(['isLoggedIn'])
     },
     data() {
         return {
-            title: 'Physics',
-            notLoggedIn: true
+            title: 'P H Y S I C S',
         }
     },
+    methods: {
+        ...mapActions(['logout']),
+        signIn() {
+            this.$router.push('/register')
+        },
+        logoutUser() {
+        this.logout()
+        }
+    }
 }
 </script>
 
@@ -61,4 +71,4 @@ export default {
         margin-left: 175px;
         padding-top: 175px;
     }
-</style>>
+</style>

@@ -4,7 +4,7 @@
      <v-container grid-list-xl text-xs-center>
        <v-layout row wrap>
          <v-flex xs4 offset-xs4>
-           <v-card dark color="dark" style="padding: 20px; border: 1px; border-radius: 50px;">
+           <v-card color="dark" style="padding: 20px; border: 1px; padding-top: 20px">
              <v-card-text>
                <h4 class="display-2 font-weight-bold">Login</h4>
                <hr>
@@ -16,8 +16,6 @@
                    label="Username"
                    prepend-icon="face"
                    type="text"
-                   color="white"
-                   counter="10"
                  >
                  </v-text-field>
                  <v-text-field 
@@ -26,12 +24,11 @@
                    label="Password"
                    prepend-icon="lock"
                    type="password"
-                   color="white"
                  >
                  </v-text-field>
               </v-form>
               <br>
-               <v-btn color="grey darken-2" large>Register</v-btn>
+               <v-btn color="grey darken-2" large @click="loginUser">Login</v-btn>
              </v-card-text>
            </v-card>
          </v-flex>
@@ -42,13 +39,37 @@
 </template>
 
 <script>
+import Vuetify from 'vuetify'
+import Vue from 'vue'
+import { mapActions } from 'vuex'
+
+Vue.use(Vuetify)
+
 export default {
-    el: '#login',
+    name: 'register',
     data() {
         return {
             username: '',
             password: '',
         }
+    },
+    methods: {
+      ...mapActions(['login']),
+      loginUser() {
+        let user = {
+          username: this.username,
+          password: this.password
+        }
+        this.login(user)
+        .then((res) => {
+          if (res) {
+            this.$router.push('/');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
     }
 }
 </script>
