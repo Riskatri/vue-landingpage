@@ -31,7 +31,55 @@ const router = new Router({
             meta: {
                 requiresAuth: true
             }
-        }
+        },
+        {
+            path: '/neovis',
+            name: 'home',
+            component: () => import('./components/Neovis.vue'),
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+          path: '/d3-graph',
+          name: 'D3',
+          component: () => import('./components/D3.vue'),
+          meta: {
+              requiresAuth: true
+          }
+        },
+        {
+          path: '/ppt',
+          name: 'Cy',
+          component: () => import('./components/Cy.vue'),
+          meta: {
+              requiresAuth: true
+          },
+        },
+        {
+          path: '/cypher',
+          name: 'cypher',
+          component: () => import('./components/Cypher.vue'),
+          meta: {
+              requiresAuth: true
+          },
+        },
+        {
+          path: '/sigma',
+          name: 'sigma',
+          component: () => import('./components/Sigma.vue'),
+          meta: {
+              requiresAuth: true
+          },
+        },
+        {
+          path: '/dashboard',
+          name: 'Dashboard',
+          component: () => import('./components/Dashboard.vue'),
+          meta: {
+              requiresAuth: true
+        },
+      }
     ]
 })
 
